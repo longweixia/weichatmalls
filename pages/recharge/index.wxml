@@ -1,0 +1,43 @@
+<view class="container">
+  <scroll-view scroll-x="true">
+    <image src="https://ws1.sinaimg.cn/large/006TPfjPgy1fsn8tgjw46j30kl0fv47l.jpg" class='bg-img'></image>
+    <image src="https://ws1.sinaimg.cn/large/006TPfjPgy1fsn94qum0jj30h80g5div.jpg" class='bg-img'></image>
+    <image src="https://ws1.sinaimg.cn/large/006TPfjPgy1fsn94px8kmj30jj0g10vj.jpg" class='bg-img'></image>
+    <image src="https://ws1.sinaimg.cn/large/006TPfjPgy1fsn94px8kmj30jj0g10vj.jpg" class='bg-img'></image>
+    <image src="https://ws1.sinaimg.cn/large/006TPfjPgy1fsn94ws8goj30jk0fddmj.jpg" class='bg-img'></image>
+    <image src="https://ws1.sinaimg.cn/large/006TPfjPgy1fsn94spbu3j30iw0bt78b.jpg" class='bg-img'></image>
+  </scroll-view>
+  <view class='form-footer'>
+    <view class='footer-title'>填写申请表</view>
+    <input class='footer-name' placeholder="填写商户名字"></input>
+    <input class='footer-adress' placeholder="填写商户地址"></input>
+    <input class='footer-peple' placeholder="联系人"></input>
+    <radio-group style="margin-left:-150rpx;font-size:30rpx" class="radio-group" bindchange="radioChange">
+      <label class="radio">
+        <radio value="nan" style="zoom:60%;"/>男
+      </label>
+      <label class="radio">
+        <radio value="nv" style="zoom:60%;"/>女
+      </label>
+    </radio-group>
+    <input class='footer-tel' placeholder="联系电话"></input>
+    <view class='notice-footer'>
+      请选择感兴趣的项目(可多选)</view>
+    <checkbox-group bindchange="checkboxChange" style="font-size:30rpx">
+      <label class="checkbox">
+        <checkbox value="wechat" style="zoom:60%;"/>微信
+      </label>
+      <label class="checkbox">
+        <checkbox value="app" style="zoom:60%;"/>app
+      </label>
+      <label class="checkbox">
+        <checkbox value="video" style="zoom:60%;"/>视频
+      </label>
+    </checkbox-group>
+    <view class="section">
+      <textarea auto-height placeholder="备注"/>
+    </view>
+    <view class='form-btn'> 提交申请 </view>
+    <view class='footer-telphone'>或拨打0755-8204-5858</view>
+  </view>
+</view>

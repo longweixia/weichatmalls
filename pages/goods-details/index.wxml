@@ -1,0 +1,87 @@
+<!--在文件头引入wxParse，下面要用  -->
+<import src="../../wxParse/wxParse.wxml" />
+<view class="container">
+  <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
+  <view class="swiper-container" wx:if="{{!goodsDetail.basicInfo.videoId}}">
+    <!--bindchange swiper中的事件,左右滑动的时候,滑动结束会出发这个事件  -->
+    <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+      <!--使用 wx:key 来指定列表中项目的唯一的标识符  -->
+      <block wx:for="{{goodsDetail.pics}}" wx:key="id">
+        <swiper-item>
+          <!--mode图片裁剪、缩放的模式 保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。 -->
+          <image src="{{item.pic}}_m" class="slide-image" width="355" height="150" mode="aspectFit" lazy-load="true" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots">
+      <block wx:for="{{goodsDetail.pics}}" wx:key="unique">
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+
+  <!-- loop是否循环播放视频，默认没有视频 -->
+  <view class="swiper-container" wx:if="{{goodsDetail.basicInfo.videoId}}">
+    <video src="{{videoMp4Src}}" autoplay="true" loop="true" style='width:100%'></video>
+  </view>
+
+  <!--商品简介start  -->
+  <view class="goods-info">
+    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 1}}">分享有赏可得 {{goodsDetail.basicInfo.commission}} 积分奖励</view>
+    <!-- <view class="goods-price" style="padding-left:35rpx;">¥ {{selectSizePrice}}</view> -->
+    <!-- <view class="goods-price" style="color:#999;font-size:24rpx;">购买{{goodsDetail.basicInfo.numberOrders}}次</view> -->
+    <view class="goods-price" style="color:#999;font-size:24rpx;">共有 {{goodsDetail.basicInfo.numberGoodReputation}} 次收藏</view>
+    <view class="goods-info-fx">
+      <!--open-type微信开放能力  -->
+      <image src='../../images/qd.png' />
+      <button open-type="share">分享</button>
+      <text>分享有赏</text>
+    </view>
+  </view>
+  <!--商品简介end -->
+
+  <view class="goods-des-info">
+    <view class="label-title">美食介绍</view>
+    <view class="goods-text">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+  </view>
+  <!--评价区  -->
+  <view class="goods-des-info" style="margin-top:35rpx;" wx:if="{{reputation}}">
+    <view class="label-title" style="border-bottom:1px solid #eee;">大家评价
+      <text style="color:red">（{{reputation.length}}）</text>
+    </view>
+    <view class="goods-text" style="margin-top:15rpx;" wx:for="{{reputation}}" wx:key="id">
+      <view style="width:100rpx;float:left;">
+        <image style="width: 100rpx; height: 100rpx;" src="{{item.user.avatarUrl}}"></image>
+        <view style="text-align:center;width:100rpx;">{{item.goods.goodReputationStr}}</view>
+      </view>
+      <view style="width:550rpx;float:left;margin-left:35rpx;border-bottom:1px solid #eee;">
+        <view>{{item.goods.goodReputationRemark}}</view>
+        <view style="color: #B0B0B0;font-size:24rpx;">{{item.goods.dateReputation}} {{item.goods.property}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="footer-box">
+    <view class="contact">
+      <!--contact-button客服会话按钮，用于在页面上显示一个客服会话按钮，用户点击该按钮后会进入客服会话。  -->
+      <!--type会话按钮的样式类型   session-from用户从该按钮进入会话时，开发者将收到带上本参数的事件推送。本参数可用于区分用户进入客服会话的来源。  -->
+      <contact-button style="opacity:0;position:absolute;" type="default-dark" session-from="weapp" size="27"></contact-button>
+      <view style='position:absolute;bottom:10rpx;'> 客服 </view>
+    </view>
+    <view class='footer-adress'>
+      <view>🎀Wagas沃歌斯(九方购物中心店)</view>
+      <view>地址：福田区中航路1号九方购物中心2层</view>
+    </view>
+    <view class="soucan" bindtap='favadd'>
+      <image class='soucan-ico' src="../../images/more/shoucan.png"></image>
+      <view style='position:absolute;bottom:10rpx;'>收藏</view>
+    </view>
+    <view class="soucan daohang">
+      <navigator url="../maps/maps">
+        <image class='soucan-ico' src="../../images/more/daohang.png"></image>
+        <view style='position:absolute;bottom:10rpx;'>导航</view>
+      </navigator>
+    </view>
+  </view>
+</view>

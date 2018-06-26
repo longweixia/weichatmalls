@@ -1,0 +1,55 @@
+page{
+    height: 100%;
+}
+.container{
+    background-color: #f5f5f9;
+    justify-content: initial;
+    width: 100%;
+}
+.bg-img{
+  width: 1400rpx;
+  height:500px;
+}
+.form-footer{
+/* background: #9E9E9E; */
+display: flex;
+flex-direction: column;
+padding-top: 50rpx;
+align-items:center;
+}
+.form-footer input,.section{
+  background: #E1DBDB;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  color:#fff; 
+  border-radius: 10rpx;
+}
+.section{
+ margin-top:15rpx;
+}
+.footer-title{
+  font-size: 40rpx;
+  margin-bottom: 15rpx;
+}
+.footer-name{
+
+}
+.notice-footer{
+  font-size: 30rpx;
+  margin-left: -50rpx;
+}
+.form-btn{
+  padding: 20rpx;
+  background: #FFB400;
+  border-radius: 20rpx;
+  color: #fff;
+}
+.footer-tel{
+  margin-top:15rpx;
+}
+.radio-group{
+  margin-left:-150px;
+}
+.footer-telphone{
+  font-size: 30rpx;
+}

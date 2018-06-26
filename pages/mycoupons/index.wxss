@@ -1,0 +1,18 @@
+.container {
+    background-color:#F2f2f2;
+}
+.coupons-list{
+    width: 100%;
+    background-color: #fff;
+    margin-top: 20rpx;
+}
+.coupons-item{
+  width:630rpx;
+  height: 180rpx;
+  margin: 10rpx;
+  padding: 50rpx;
+  background-color: #FFB400;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  color: #fff;
+}

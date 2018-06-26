@@ -1,0 +1,90 @@
+<view class="container">
+  <!--轮播图，没用插件，start  -->
+  <view class="swiper-container">
+    <!--bindchange    当前所在滑块的index即current 改变时会触发 change 事件，event.detail = {current: current, source: source}  -->
+    <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+      <block wx:for="{{banners}}" wx:key="id">
+        <swiper-item>
+          <!--使用data-id设置每个item的id值,item.businessId该 swiper-item 的标识符，轮播图自带的  -->
+          <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}" class="slide-image" width="750rpx" height="400rpx" />
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <view class="dots">
+      <block wx:for="{{banners}}" wx:key="unique">
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+      </block>
+    </view>
+
+  </view>
+  <!--轮播图end  -->
+  <!--导航栏start  -->
+  <view class="type-container">
+    <scroll-view class="type-navbar" scroll-x="true">
+      <view class="type-box" wx:for-items="{{categories}}" wx:key="id">
+        <!--bindtap，当用户点击该组件的时候会在该页面对应的Page中找到相应的事件处理函数。 -->
+        <view id="{{item.id}}" class="type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick">
+          {{item.name}}
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!--导航栏end  -->
+  <!--搜素栏start  -->
+  <view class="search-view" style="background:{{ scrollTop === 0 ?'-webkit-linear-gradient(top, rgba(105,195,170, 1), rgba(105,195,170, 0.3))' :( scrollTop<200 ? 'rgba(105,195,170,'+(scrollTop/400+0.3) +')' : 'rgba(105,195,170,1)')  }} ">
+    <view class="search-content">
+      <image src="/images/search-pic.png" class="search-icon" />
+      <!--confirm-type="搜索"设置键盘右下角按钮的文字  bindinput当键盘输入时，触发input事件
+      bindconfirm点击完成按钮时触发-->
+      <input placeholder="请输入搜索内容" class="search-input" maxlength="30" confirm-type="搜索" bindinput='listenerSearchInput' bindconfirm='toSearch'>
+      </input>
+      <button class='search-btn' bindtap="toSearch">搜索
+      </button>
+    </view>
+  </view>
+  <!--搜素栏end  -->
+  <!--公告start  -->
+  <view wx:if="{{noticeList}}" class="notice">
+    <view class="notice_iteml">柠檬头条：</view>
+    <view class="boder-right"></view>
+    <!--vertical="true"滑动为纵向  circular="true"采用衔接滑动-->
+    <swiper wx:if="{{noticeList}}" class="notice_swiper" vertical="true" autoplay="true" circular="true" interval="3000">
+      <!--dataList获取到的数据数组   pen-type="navigate"微信小程序页面跳转的四种方式之一-->
+      <navigator wx:for-items="{{noticeList.dataList}}" wx:key="id" url="/pages/notice/show?id={{item.id}}" open-type="navigate">
+        <swiper-item>
+          <view class="notice_itemr">{{item.title}}</view>
+        </swiper-item>
+      </navigator>
+    </swiper>
+  </view>
+  <!--公告    end  -->
+  <!--优惠券start   一开始是隐藏的  -->
+  <view class="coupons" hidden="{{hasNoCoupons}}">
+    <scroll-view class="coupons-scroll" scroll-x="true">
+      <view class="coupons-item" wx:for-items="{{coupons}}" wx:for-index="idx" wx:key="id" bindtap="gitCoupon" data-id="{{item.id}}">
+        <view style="font-size: 35rpx"> ￥ {{item.moneyMax}}元 </view>
+        <view style='white-space: pre-wrap;'> {{item.name}} </view>
+        <view> 满 {{item.moneyHreshold}} 元使用 </view>
+        <view wx:if="{{item.dateEndType == 0}}"> {{item.dateEnd}} 前有效 </view>
+        <view wx:if="{{item.dateEndType == 1}}"> 领取 {{item.dateEndDays}} 天内有效 </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!--优惠券end  -->
+  <!--商品列表start  -->
+  <view class="goods-container">
+    <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+      <view class="img-box">
+        <image src="{{item.pic}}_m" class="image" mode="aspectFill" lazy-load="true" />
+      </view>
+      <view class="goods-title">{{item.name}}</view>
+      <view style='display:flex;'>
+        <view class="goods-adress">地址：福田区中航路1号九方购物中心2层</view>
+      </view>
+    </view>
+  </view>
+  <!--商品列表end -->
+  <!--默认不隐藏  -->
+  <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
+</view>

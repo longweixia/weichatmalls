@@ -1,0 +1,7 @@
+
+{
+  "navigationBarTitleText": "柠檬美食 ",
+  "usingComponents": {
+    "map-route": "plugin://myPlugin/mapRoute"
+  }
+}

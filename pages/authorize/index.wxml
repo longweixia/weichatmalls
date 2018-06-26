@@ -1,0 +1,10 @@
+<view class="container">
+<!--bindsubmit携带 form 中的数据触发 submit 事件  -->
+    <form bindsubmit="bindSave">
+    <view style='width:100%;padding-left:30rpx;font-size: 28rpx;margin-top:30rpx;'>1、同意当前小程序获取我的微信头像；</view>
+    <view style='width:100%;padding-left:30rpx;font-size: 28rpx;margin-top:30rpx;'>2、同意当前小程序获取我的微信昵称等其他信息；</view>
+    <!--open-type微信开放能力  -->
+    <!--bindgetuserinfo用户点击该按钮时，会返回获取到的用户信息，回调的detail数据与wx.getUserInfo返回的一致  -->
+    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="save-btn">授权登录</button>
+    </form>
+</view>
